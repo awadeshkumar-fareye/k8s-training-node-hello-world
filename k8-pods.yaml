@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-node-deployment
+spec:
+  replicas: 2 # Set the desired number of Pods to 2
+  selector:
+    matchLabels:
+      app: k8s-node
+  template: # Pod template
+    metadata:
+      labels:
+        app: k8s-node
+    spec:
+      containers:
+      - name: k8s-node-app
+        image: awadesh/k8_training_node_images:v1
+        ports:
+        - containerPort: 8000
+      imagePullSecrets:
+      - name: secret-registry-secret
